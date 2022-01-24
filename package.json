@@ -1,0 +1,18 @@
+{
+  "name": "input-output-record-system",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:manzottiflavio/input-output-record-system.git",
+  "author": "flavio manzotti <manzottiflavio22@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev":"nodemon src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.2",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
