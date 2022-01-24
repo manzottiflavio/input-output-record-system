@@ -59,7 +59,7 @@ app.post("/UserEnter",verifyIfCustomerAlredyExists,(request,response)=>{
     const getIn={
         name,
         enter_at: new Date(),
-        type:"enter",
+        type:"came in",
     };
     console.log(getIn)
     users.relatorio.push(getIn)
@@ -72,15 +72,15 @@ app.post("/UserOut",verifyIfCustomerAlredyExists,(request,response)=>{
     const {users}=request;
     const {name}=request.body
     
-    user.getOut=({
+    const getOut={
         name,
-        creat_at: new Date(),
-        type:"out",
-    });
+        exit_at: new Date(),
+        type:"came out",
+    };
     
-    user.relatorio.push(getOut)
-    
-    return response.status(201).json({message:" enter confirmed"});
+    users.relatorio.push(getOut)
+    console.log(getOut)
+    return response.status(201).json({message:"exit confirmed"});
     
 });
 app.get("/create",verifyIfCustomerAlredyExists,(request,response)=>{
