@@ -14,10 +14,18 @@ function verifyIfCustomerAlredyExists(request,response,next){
         return response.status(401).json({message:"error user not found"});
     }
     
-    request.user=user;
+    request.users=users;
     return next();
     
 };
+
+function operation(relatorio){
+
+
+
+};
+
+
 
 app.post("/createUser",(request,response)=>{
     const {name,cpf}=request.body;
@@ -32,7 +40,7 @@ app.post("/createUser",(request,response)=>{
         cpf,
         id:uuidv4(),
         date:new Date(),
-        Statement:[],
+       relatoro:[],
     });
     console.log(user)
     return response.status(201).json({message:"user create successful"});
@@ -40,18 +48,23 @@ app.post("/createUser",(request,response)=>{
 });
 
 app.post("/UserEnter",verifyIfCustomerAlredyExists,(request,response)=>{
-    const {cpf}=request;
+    const {users}=request;
+    const {name}=request.body
     
-    user.push({
-        cpf,
-        enter_at: new Date()
+    user.operation=({
+        name,
+        enter_at: new Date(),
+        type:"enter",
     });
-    console.log(user)
-    return response.status(201).json({message:"user enter"});
+
+    user.relatorio.push(operation)
+
+    return response.status(201).json({message:" enter confirmed"});
     
 });
 
 app.get("/create",verifyIfCustomerAlredyExists,(request,response)=>{
+    const {users}=request;
     const {cpf}=request;
     
     
