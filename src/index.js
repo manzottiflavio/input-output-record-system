@@ -19,11 +19,16 @@ function verifyIfCustomerAlredyExists(request,response,next){
     
 };
 
-function operation(relatorio){
-
-
-
-};
+/*function gotIn(relatorio){
+    const get =relatorio((name,operation)=>{
+        if(operation.type === 'enter'){
+            return name + date.operation;
+        }else{
+            return Date.now();
+        }
+    })
+    return get;
+}*/
 
 
 
@@ -40,34 +45,60 @@ app.post("/createUser",(request,response)=>{
         cpf,
         id:uuidv4(),
         date:new Date(),
-       relatoro:[],
+        relatorio:[],
     });
-    console.log(user)
+    
     return response.status(201).json({message:"user create successful"});
     
 });
 
 app.post("/UserEnter",verifyIfCustomerAlredyExists,(request,response)=>{
     const {users}=request;
-    const {name}=request.body
+    const {name}=request.body;
     
-    user.operation=({
+    const getIn={
         name,
         enter_at: new Date(),
         type:"enter",
-    });
-
-    user.relatorio.push(operation)
-
+    };
+    console.log(getIn)
+    users.relatorio.push(getIn)
+    
     return response.status(201).json({message:" enter confirmed"});
     
 });
 
+app.post("/UserOut",verifyIfCustomerAlredyExists,(request,response)=>{
+    const {users}=request;
+    const {name}=request.body
+    
+    user.getOut=({
+        name,
+        creat_at: new Date(),
+        type:"out",
+    });
+    
+    user.relatorio.push(getOut)
+    
+    return response.status(201).json({message:" enter confirmed"});
+    
+});
 app.get("/create",verifyIfCustomerAlredyExists,(request,response)=>{
     const {users}=request;
-    const {cpf}=request;
+    return response.status(201).json(users);
+})
+
+app.get("/UserEnter",verifyIfCustomerAlredyExists,(request,response)=>{
+    const {users}=request;
+    const get=gotIn(users.relatorio);
+    if(get===null){
+        return response.status(400).json({message:"error"})
+    }else{
+        console.log(get)
+        return response.status(201).json(get)
+    };
     
     
     
-    return response.status(201).json(user);
+    
 })
